@@ -2,8 +2,9 @@
 // some global vars well reference later
 let outputMessage;
 let playerSelection;
-let winCount;
-let loseCount;
+let roundCount = 0;
+let winCount = 0;
+let loseCount = 0;
 
 // function to randomly return either rock paper or scissors
 function getComputerChoice(){
@@ -18,9 +19,10 @@ function getComputerChoice(){
     }
 }
 
-// play a single round takes a string outputs a string, increments wincount losecount, or neither (tie)
+// play a single round takes a string, outputs a string, increments wincount losecount, or neither (tie)
 function playRound(playerSelection){
     if(typeof(playerSelection) != "string"){
+        console.log("input not a string");
         return;
     }
     let cleanedInput = playerSelection.toUpperCase();
@@ -61,31 +63,52 @@ function playRound(playerSelection){
     }
 }
 
+
 // play a game
 function playGame(){
-    
-    // set the number of rounds played as well as reset wins and losess
-    let roundCount = 0;
-    winCount = 0;
-    loseCount = 0;
 
-    // five rounds
-    while(roundCount < 5){
-    
-        playerSelection = prompt("Rock, Paper, or Scissors", "Rock");
-    
-        // play a round
-        outputMessage = playRound(playerSelection);
 
-        // output for user
-        alert(outputMessage +" You've won " + winCount + " rounds and lost " + loseCount + " rounds.");
-        roundCount++;
+    // these assign our inputs by id
+    const rock = document.querySelector(
+        "#rock"
+    );
+    const paper = document.querySelector(
+        "#paper"
+    );
+    const scissors = document.querySelector(
+        "#scissors"
+    );
 
-    }
+    // results div
+    // these assign our inputs by id
+    const results = document.querySelector(
+        ".results"
+    );
 
-    // final wincount
-    alert("Game over, you won " + winCount + " out of 5 rounds!");
+    // assign our options above as a group by their class
+    const selectors = this.document.querySelectorAll(".selectors");
 
+    // trigger round
+    function triggerRound() {
+
+                if(roundCount < 6){
+                    playerSelection = this.id;
+                    outcome = playRound(playerSelection);
+                    roundCount++;
+                    results.textContent = outcome +" You've won " + winCount + " rounds and lost " + loseCount + " rounds.";
+                } else {
+                    results.textContent = "Game over, you won " + winCount + " out of 5 rounds!";
+                }
+                
+            }
+
+    // listen for a selection, play a round, update score
+    selectors.forEach(function (selector) {
+        selector.addEventListener(
+            "click",
+            triggerRound
+            )
+    });
 
 }
 

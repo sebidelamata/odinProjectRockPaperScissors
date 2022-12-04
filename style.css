@@ -1,0 +1,30 @@
+.selector-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 4rem;
+}
+
+ul {
+    list-style: none;
+}
+
+.selectors {
+    background-color: beige;
+    padding: 32px;
+    font-weight: 900;
+    font-size: 48px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.results {
+    display: flex;
+    color: red;
+    font-weight: 900;
+    font-size: 32px;
+}
